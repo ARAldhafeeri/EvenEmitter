@@ -52,7 +52,7 @@ pip install asyncio
 ```python
 import asyncio
 from collections import defaultdict
-from events.emitter import EventEmitter
+from EventEmitterPy.emitter import EventEmitter
 
 # Example Usage
 async def my_handler(event, *args, **kwargs):
