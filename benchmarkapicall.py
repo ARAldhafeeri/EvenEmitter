@@ -4,11 +4,14 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from events.emitter import EventEmitter
 import tracemalloc
-import logging
 
-logger = logging.getLogger(__name__)
-#  log to a file 
-logging.basicConfig(filename='benchmark.log', level=logging.DEBUG)
+import httpx
+
+async def fetch_data(url):
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+        return response.text
+
     
 async def benchmark_event_emitter(num_events):
     emitter = EventEmitter()
@@ -18,7 +21,7 @@ async def benchmark_event_emitter(num_events):
 
     async def listener(*args):
         """ asynchrounous api call"""
-        logger.info("listener called")
+        res = await fetch_data("some-url")
 
 
     # memory usage
@@ -43,7 +46,7 @@ async def benchmark_event_emitter(num_events):
 
 # Run the benchmark test with adjustable parameters
 if __name__ == "__main__":
-    num_events = 1000000
+    num_events = 1
 
 
     # Run the benchmark asynchronously

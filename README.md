@@ -6,12 +6,22 @@ Python library for event driven programming built on top of asyncio.
 
 The `EventEmitter` class allows you to create and manage events and event handlers in an asynchronous environment. It provides a simple mechanism to emit events and notify registered handlers.
 
-
-## benchmark
-The  benchmark.py file contains a simple benchmarking script that compares the performance of the EventEmitter class to the built-in asyncio.Event class. The benchmarking script creates 1000 events and 1000 handlers for each event. It then emits all events and measures the time it takes to complete. The benchmarking script can be run with the following command:
+## benchmark logging events 
+the benchmarklogging.py file contains a simple benchmarking script that compares the performance of the EventEmitter class to the built-in asyncio.Event class. The benchmarking script creates 1 million events and 1 million handlers for each event. It then emits all events and measures the time it takes to complete. The benchmarking script can be run with the following command:
 
 ```bash
-$ python benchmark.py
+Benchmarking 1000000
+Current memory usage is 199.879491MB; Peak was 199.879563MB
+Emitted 1000000 in 32.328567299999996 seconds
+```
+The benchmark for 1 million events and 1 million handlers shows memory usage of 199.879491MB and a time of 32.328567299999996 seconds. This means that the event emitter is using 199.879491MB of memory and it took 32.328567299999996 seconds to emit 1 million events with 1 million handlers. Inside the handler logging is done to simulate the real world scenario.
+
+```bash
+## benchmark with api call
+The  benchmarkapicall.py file contains a simple benchmarking script that compares the performance of the EventEmitter class to the built-in asyncio.Event class. The benchmarking script creates 1000 events and 1000 handlers for each event. It then emits all events and measures the time it takes to complete. The benchmarking script can be run with the following command:
+
+```bash
+$ python benchmarkapicall.py
 ```
 results: 
 1. 1 event 1 handler
