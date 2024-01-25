@@ -1,6 +1,6 @@
 import asyncio
 import unittest
-from events.emitter import EventEmitter
+from EventEmitterPy.emitter import EventEmitter
 
 class TestEventEmitterAsyncio(unittest.IsolatedAsyncioTestCase):
 

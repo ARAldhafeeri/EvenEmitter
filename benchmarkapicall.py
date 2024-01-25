@@ -2,7 +2,7 @@ import asyncio
 import timeit
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
-from events.emitter import EventEmitter
+from EventEmitterPy.emitter import EventEmitter
 import tracemalloc
 
 import httpx
