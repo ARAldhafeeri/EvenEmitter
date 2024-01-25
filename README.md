@@ -16,8 +16,9 @@ Emitted 1000000 in 32.328567299999996 seconds
 ```
 The benchmark for 1 million events and 1 million handlers shows memory usage of 199.879491MB and a time of 32.328567299999996 seconds. This means that the event emitter is using 199.879491MB of memory and it took 32.328567299999996 seconds to emit 1 million events with 1 million handlers. Inside the handler logging is done to simulate the real world scenario.
 
-```bash
+
 ## benchmark with api call
+Note : noticable slowdown due to service not  the library.
 The  benchmarkapicall.py file contains a simple benchmarking script that compares the performance of the EventEmitter class to the built-in asyncio.Event class. The benchmarking script creates 1000 events and 1000 handlers for each event. It then emits all events and measures the time it takes to complete. The benchmarking script can be run with the following command:
 
 ```bash
