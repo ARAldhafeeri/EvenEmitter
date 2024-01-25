@@ -44,7 +44,7 @@ This means
 ### Installation
 
 ```bash
-pip install asyncio
+pip install EventEmitterPy
 ```
 
 ### Example
