@@ -65,12 +65,39 @@ Emit an event and call all registered handlers.
 - `args`: Additional positional arguments for the event handlers.
 - `kwargs`: Additional keyword arguments for the event handlers.
 
+```python
+import asyncio
+
+async def my_handler(event, *args, **kwargs):
+    print(f"Event '{event}' received with arguments: {args} and kwargs: {kwargs}")
+
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering a handler for the 'my_event' event
+emitter.on('my_event', my_handler)
+
+# Emitting the 'my_event' event
+await emitter.emit('my_event', 1, 2, key='value')
+```
+
 ### `on(event, handler)`
 
 Register an event handler.
 
 - `event`: The name of the event.
 - `handler`: The function to be called when the event is emitted.
+
+```python
+def my_handler(event, *args, **kwargs):
+    print(f"Event '{event}' received with arguments: {args} and kwargs: {kwargs}")
+
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering a handler for the 'my_event' event
+emitter.on('my_event', my_handler)
+```
 
 ### `off(event, handler)`
 
@@ -79,21 +106,76 @@ Unregister an event handler.
 - `event`: The name of the event.
 - `handler`: The function to be unregistered.
 
+```python
+def my_handler(event, *args, **kwargs):
+    print(f"Event '{event}' received with arguments: {args} and kwargs: {kwargs}")
+
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering a handler for the 'my_event' event
+emitter.on('my_event', my_handler)
+
+# Unregistering the handler for the 'my_event' event
+emitter.off('my_event', my_handler)
+```
+
 ### `removeAllListeners(event)`
 
 Remove all listeners for the given event.
 
 - `event`: The name of the event.
 
+```python
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering multiple handlers for the 'my_event' event
+emitter.on('my_event', lambda event: print(f"Handler 1 for '{event}'"))
+emitter.on('my_event', lambda event: print(f"Handler 2 for '{event}'"))
+
+# Removing all listeners for the 'my_event' event
+emitter.removeAllListeners('my_event')
+```
+
+
+
 ### `event_names()`
 
 Return a list of all registered event names.
+
+```python
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering handlers for different events
+emitter.on('event1', lambda event: None)
+emitter.on('event2', lambda event: None)
+
+# Getting a list of all registered event names
+events = emitter.event_names()
+print("Registered events:", events)
+```
+
 
 ### `listener_count(event)`
 
 Return the number of listeners for the given event.
 
 - `event`: The name of the event.
+
+```python
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering multiple handlers for the 'my_event' event
+emitter.on('my_event', lambda event: None)
+emitter.on('my_event', lambda event: None)
+
+# Getting the number of listeners for the 'my_event' event
+count = emitter.listener_count('my_event')
+print("Number of listeners for 'my_event':", count)
+```
 
 ### `once(event, handler)`
 
@@ -102,17 +184,60 @@ Register a handler that will be called at most once.
 - `event`: The name of the event.
 - `handler`: The function to be called once.
 
+```python
+def my_handler(event, *args, **kwargs):
+    print(f"Event '{event}' received with arguments: {args} and kwargs: {kwargs}")
+
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering a handler for the 'my_event' event that will be called once
+emitter.once('my_event', my_handler)
+
+# Emitting the 'my_event' event
+await emitter.emit('my_event', 1, 2, key='value')
+```
+
+
 ### `listeners(event)`
 
 Return a list of all listeners for the given event.
 
 - `event`: The name of the event.
 
+
+```python
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering multiple handlers for the 'my_event' event
+emitter.on('my_event', lambda event: None)
+emitter.on('my_event', lambda event: None)
+
+# Getting a list of all listeners for the 'my_event' event
+listeners = emitter.listeners('my_event')
+print("Listeners for 'my_event':", listeners)
+```
+
+
 ### `rawListeners(event)`
 
 Return a copy of the handlers for the given event.
 
 - `event`: The name of the event.
+
+```python
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering multiple handlers for the 'my_event' event
+emitter.on('my_event', lambda event: None)
+emitter.on('my_event', lambda event: None)
+
+# Getting a copy of all handlers for the 'my_event' event
+handlers_copy = emitter.rawListeners('my_event')
+print("Copy of handlers for 'my_event':", handlers_copy)
+```
 
 ### `prependListener(event, handler)`
 
@@ -121,21 +246,69 @@ Register a handler to be called before all others.
 - `event`: The name of the event.
 - `handler`: The function to be called first.
 
+```python
+def my_handler(event, *args, **kwargs):
+    print(f"Event '{event}' received with arguments: {args} and kwargs: {kwargs}")
+
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering a handler for the 'my_event' event
+emitter.on('my_event', my_handler)
+
+# Registering a handler to be called before the existing handler
+emitter.prependListener('my_event', lambda event: print(f"First handler for '{event}'"))
+
+# Emitting the 'my_event' event
+await emitter.emit('my_event', 1, 2, key='value')
+```
+
 ### `setMaxListeners(event, n)`
 
-Set the maximum number of listeners for all events.
+Set the maximum number of listeners for all events. Default is 10.
 
 - `event`: The name of the event.
 - `n`: The maximum number of listeners.
 
+
+```python
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Setting the maximum number of listeners for the 'my_event' event
+emitter.setMaxListeners('my_event', 5)
+```
 ### `getMaxListeners(event)`
 
-Return the maximum number of listeners for all events.
+Return the maximum number of listeners for an event.
 
 - `event`: The name of the event.
+
+```python
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Setting the maximum number of listeners for the 'my_event' event
+emitter.setMaxListeners('my_event', 5)
+
+# Getting the maximum number of listeners for the 'my_event' event
+max_listeners = emitter.getMaxListeners('my_event')
+print("Max listeners for 'my_event':", max_listeners)
+```
 
 ### `onAny(handler)`
 
 Register a handler for all events.
 
 - `handler`: The function to be called for all events.
+
+```python
+def my_handler(event, *args, **kwargs):
+    print(f"Event '{event}' received with arguments: {args} and kwargs: {kwargs}")
+
+# Creating an instance of EventEmitter
+emitter = EventEmitter()
+
+# Registering a handler for all events
+emitter.onAny(my_handler)
+```
