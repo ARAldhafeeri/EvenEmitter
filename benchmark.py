@@ -19,9 +19,9 @@ async def benchmark_event_emitter(num_events):
     # print bench mark start 
     print(f"Benchmarking {num_events}")
 
-    async def listener(event, data):
+    async def listener(*args):
         """ asynchrounous api call"""
-        res = await fetch_data("http://137.184.244.241")
+        res = await fetch_data("some-url")
 
 
     # memory usage

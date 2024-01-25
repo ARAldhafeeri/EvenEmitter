@@ -10,7 +10,7 @@ class EventEmitter:
         """Emit an event and call all handlers."""
         # named events
         handlers = self._event_handlers.get(event, [])
-        coroutines = [handler("*", *args, **kwargs) for handler in handlers]
+        coroutines = [handler(*args, **kwargs) for handler in handlers]
         # any events
         any_handlers = self._event_handlers.get('*', [])
         any_coroutines = [handler(event, *args, **kwargs) for handler in any_handlers]
